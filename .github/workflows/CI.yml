@@ -17,7 +17,7 @@ jobs:
           cmake --build .
       - name: Test
         run: |
-          uv_run_tests.exe
+          Debug\uv_run_tests_a.exe
 
   build-android:
     runs-on: ubuntu-latest
