@@ -18,6 +18,7 @@ jobs:
       - name: Test
         shell: cmd
         run: |
+          tree
           Debug\uv_run_tests_a.exe
 
   build-android:
