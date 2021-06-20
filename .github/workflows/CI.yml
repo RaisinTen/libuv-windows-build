@@ -10,15 +10,12 @@ jobs:
       - name: Installing MSVC
         uses: ilammy/msvc-dev-cmd@v1
       - name: Build
+        shell: cmd
         run: |
           mkdir build
           cd build
           cmake .. -DBUILD_TESTING=ON
           cmake --build .
-      - name: Test
-        shell: cmd
-        run: |
-          tree
           Debug\uv_run_tests_a.exe
 
   build-android:
