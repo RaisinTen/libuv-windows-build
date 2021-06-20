@@ -16,6 +16,7 @@ jobs:
           cmake .. -DBUILD_TESTING=ON
           cmake --build .
       - name: Test
+        shell: cmd
         run: |
           Debug\uv_run_tests_a.exe
 
