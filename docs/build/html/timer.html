@@ -1,0 +1,226 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>uv_timer_t — Timer handle &#8212; libuv documentation</title>
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.40.1-dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="uv_prepare_t — Prepare handle" href="prepare.html" />
+    <link rel="prev" title="uv_req_t — Base request" href="request.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="prepare.html" title="uv_prepare_t — Prepare handle"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="request.html" title="uv_req_t — Base request"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">libuv 1.40.1-dev documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="api.html" accesskey="U">API documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="uv-timer-t-timer-handle">
+<span id="timer"></span><h1><a class="reference internal" href="#c.uv_timer_t" title="uv_timer_t"><code class="xref c c-type docutils literal"><span class="pre">uv_timer_t</span></code></a> — Timer handle<a class="headerlink" href="#uv-timer-t-timer-handle" title="Permalink to this headline">¶</a></h1>
+<p>Timer handles are used to schedule callbacks to be called in the future.</p>
+<div class="section" id="data-types">
+<h2>Data types<a class="headerlink" href="#data-types" title="Permalink to this headline">¶</a></h2>
+<dl class="type">
+<dt id="c.uv_timer_t">
+<code class="descname">uv_timer_t</code><a class="headerlink" href="#c.uv_timer_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Timer handle type.</p>
+</dd></dl>
+
+<dl class="type">
+<dt id="c.uv_timer_cb">
+void <code class="descname">(*uv_timer_cb)</code><span class="sig-paren">(</span><a class="reference internal" href="#c.uv_timer_t" title="uv_timer_t">uv_timer_t</a>*<em>&nbsp;handle</em><span class="sig-paren">)</span><a class="headerlink" href="#c.uv_timer_cb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Type definition for callback passed to <a class="reference internal" href="#c.uv_timer_start" title="uv_timer_start"><code class="xref c c-func docutils literal"><span class="pre">uv_timer_start()</span></code></a>.</p>
+</dd></dl>
+
+<div class="section" id="public-members">
+<h3>Public members<a class="headerlink" href="#public-members" title="Permalink to this headline">¶</a></h3>
+<p>N/A</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">The <a class="reference internal" href="handle.html#c.uv_handle_t" title="uv_handle_t"><code class="xref c c-type docutils literal"><span class="pre">uv_handle_t</span></code></a> members also apply.</p>
+</div>
+</div>
+</div>
+<div class="section" id="api">
+<h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="c.uv_timer_init">
+int <code class="descname">uv_timer_init</code><span class="sig-paren">(</span><a class="reference internal" href="loop.html#c.uv_loop_t" title="uv_loop_t">uv_loop_t</a>*<em>&nbsp;loop</em>, <a class="reference internal" href="#c.uv_timer_t" title="uv_timer_t">uv_timer_t</a>*<em>&nbsp;handle</em><span class="sig-paren">)</span><a class="headerlink" href="#c.uv_timer_init" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize the handle.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.uv_timer_start">
+int <code class="descname">uv_timer_start</code><span class="sig-paren">(</span><a class="reference internal" href="#c.uv_timer_t" title="uv_timer_t">uv_timer_t</a>*<em>&nbsp;handle</em>, <a class="reference internal" href="#c.uv_timer_cb" title="uv_timer_cb">uv_timer_cb</a><em>&nbsp;cb</em>, uint64_t<em>&nbsp;timeout</em>, uint64_t<em>&nbsp;repeat</em><span class="sig-paren">)</span><a class="headerlink" href="#c.uv_timer_start" title="Permalink to this definition">¶</a></dt>
+<dd><p>Start the timer. <cite>timeout</cite> and <cite>repeat</cite> are in milliseconds.</p>
+<p>If <cite>timeout</cite> is zero, the callback fires on the next event loop iteration.
+If <cite>repeat</cite> is non-zero, the callback fires first after <cite>timeout</cite>
+milliseconds and then repeatedly after <cite>repeat</cite> milliseconds.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Does not update the event loop’s concept of “now”. See <a class="reference internal" href="loop.html#c.uv_update_time" title="uv_update_time"><code class="xref c c-func docutils literal"><span class="pre">uv_update_time()</span></code></a> for more information.</p>
+<p class="last">If the timer is already active, it is simply updated.</p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.uv_timer_stop">
+int <code class="descname">uv_timer_stop</code><span class="sig-paren">(</span><a class="reference internal" href="#c.uv_timer_t" title="uv_timer_t">uv_timer_t</a>*<em>&nbsp;handle</em><span class="sig-paren">)</span><a class="headerlink" href="#c.uv_timer_stop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stop the timer, the callback will not be called anymore.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.uv_timer_again">
+int <code class="descname">uv_timer_again</code><span class="sig-paren">(</span><a class="reference internal" href="#c.uv_timer_t" title="uv_timer_t">uv_timer_t</a>*<em>&nbsp;handle</em><span class="sig-paren">)</span><a class="headerlink" href="#c.uv_timer_again" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stop the timer, and if it is repeating restart it using the repeat value
+as the timeout. If the timer has never been started before it returns
+UV_EINVAL.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.uv_timer_set_repeat">
+void <code class="descname">uv_timer_set_repeat</code><span class="sig-paren">(</span><a class="reference internal" href="#c.uv_timer_t" title="uv_timer_t">uv_timer_t</a>*<em>&nbsp;handle</em>, uint64_t<em>&nbsp;repeat</em><span class="sig-paren">)</span><a class="headerlink" href="#c.uv_timer_set_repeat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the repeat interval value in milliseconds. The timer will be scheduled
+to run on the given interval, regardless of the callback execution
+duration, and will follow normal timer semantics in the case of a
+time-slice overrun.</p>
+<p>For example, if a 50ms repeating timer first runs for 17ms, it will be
+scheduled to run again 33ms later. If other tasks consume more than the
+33ms following the first timer callback, then the callback will run as soon
+as possible.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If the repeat value is set from a timer callback it does not immediately take effect.
+If the timer was non-repeating before, it will have been stopped. If it was repeating,
+then the old repeat value will have been used to schedule the next timeout.</p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.uv_timer_get_repeat">
+uint64_t <code class="descname">uv_timer_get_repeat</code><span class="sig-paren">(</span>const <a class="reference internal" href="#c.uv_timer_t" title="uv_timer_t">uv_timer_t</a>*<em>&nbsp;handle</em><span class="sig-paren">)</span><a class="headerlink" href="#c.uv_timer_get_repeat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the timer repeat value.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.uv_timer_get_due_in">
+uint64_t <code class="descname">uv_timer_get_due_in</code><span class="sig-paren">(</span>const <a class="reference internal" href="#c.uv_timer_t" title="uv_timer_t">uv_timer_t</a>*<em>&nbsp;handle</em><span class="sig-paren">)</span><a class="headerlink" href="#c.uv_timer_get_due_in" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the timer due value or 0 if it has expired. The time is relative to
+<a class="reference internal" href="loop.html#c.uv_now" title="uv_now"><code class="xref c c-func docutils literal"><span class="pre">uv_now()</span></code></a>.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 1.40.0.</span></p>
+</div>
+</dd></dl>
+
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">The <a class="reference internal" href="handle.html#c.uv_handle_t" title="uv_handle_t"><code class="xref c c-type docutils literal"><span class="pre">uv_handle_t</span></code></a> API functions also apply.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">uv_timer_t</span></code> — Timer handle</a><ul>
+<li><a class="reference internal" href="#data-types">Data types</a><ul>
+<li><a class="reference internal" href="#public-members">Public members</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#api">API</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="request.html"
+                        title="previous chapter"><code class="docutils literal"><span class="pre">uv_req_t</span></code> — Base request</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="prepare.html"
+                        title="next chapter"><code class="docutils literal"><span class="pre">uv_prepare_t</span></code> — Prepare handle</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/timer.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="prepare.html" title="uv_prepare_t — Prepare handle"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="request.html" title="uv_req_t — Base request"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">libuv 1.40.1-dev documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="api.html" >API documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014-present, libuv contributors.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
+    </div>
+  </body>
+</html>

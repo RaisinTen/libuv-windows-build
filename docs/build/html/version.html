@@ -1,0 +1,190 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Version-checking macros and functions &#8212; libuv documentation</title>
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.40.1-dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="uv_loop_t — Event loop" href="loop.html" />
+    <link rel="prev" title="Error handling" href="errors.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="loop.html" title="uv_loop_t — Event loop"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="errors.html" title="Error handling"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">libuv 1.40.1-dev documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="api.html" accesskey="U">API documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="version-checking-macros-and-functions">
+<span id="version"></span><h1>Version-checking macros and functions<a class="headerlink" href="#version-checking-macros-and-functions" title="Permalink to this headline">¶</a></h1>
+<p>Starting with version 1.0.0 libuv follows the <a class="reference external" href="https://semver.org">semantic versioning</a>
+scheme. This means that new APIs can be introduced throughout the lifetime of
+a major release. In this section you’ll find all macros and functions that
+will allow you to write or compile code conditionally, in order to work with
+multiple libuv versions.</p>
+<div class="section" id="macros">
+<h2>Macros<a class="headerlink" href="#macros" title="Permalink to this headline">¶</a></h2>
+<dl class="macro">
+<dt id="c.UV_VERSION_MAJOR">
+<code class="descname">UV_VERSION_MAJOR</code><a class="headerlink" href="#c.UV_VERSION_MAJOR" title="Permalink to this definition">¶</a></dt>
+<dd><p>libuv version’s major number.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.UV_VERSION_MINOR">
+<code class="descname">UV_VERSION_MINOR</code><a class="headerlink" href="#c.UV_VERSION_MINOR" title="Permalink to this definition">¶</a></dt>
+<dd><p>libuv version’s minor number.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.UV_VERSION_PATCH">
+<code class="descname">UV_VERSION_PATCH</code><a class="headerlink" href="#c.UV_VERSION_PATCH" title="Permalink to this definition">¶</a></dt>
+<dd><p>libuv version’s patch number.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.UV_VERSION_IS_RELEASE">
+<code class="descname">UV_VERSION_IS_RELEASE</code><a class="headerlink" href="#c.UV_VERSION_IS_RELEASE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set to 1 to indicate a release version of libuv, 0 for a development
+snapshot.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.UV_VERSION_SUFFIX">
+<code class="descname">UV_VERSION_SUFFIX</code><a class="headerlink" href="#c.UV_VERSION_SUFFIX" title="Permalink to this definition">¶</a></dt>
+<dd><p>libuv version suffix. Certain development releases such as Release Candidates
+might have a suffix such as “rc”.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.UV_VERSION_HEX">
+<code class="descname">UV_VERSION_HEX</code><a class="headerlink" href="#c.UV_VERSION_HEX" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the libuv version packed into a single integer. 8 bits are used for
+each component, with the patch number stored in the 8 least significant
+bits. E.g. for libuv 1.2.3 this would be 0x010203.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 1.7.0.</span></p>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="c.uv_version">
+unsigned int <code class="descname">uv_version</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#c.uv_version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns <a class="reference internal" href="#c.UV_VERSION_HEX" title="UV_VERSION_HEX"><code class="xref c c-macro docutils literal"><span class="pre">UV_VERSION_HEX</span></code></a>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.uv_version_string">
+const char* <code class="descname">uv_version_string</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#c.uv_version_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the libuv version number as a string. For non-release versions the
+version suffix is included.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Version-checking macros and functions</a><ul>
+<li><a class="reference internal" href="#macros">Macros</a></li>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="errors.html"
+                        title="previous chapter">Error handling</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="loop.html"
+                        title="next chapter"><code class="docutils literal"><span class="pre">uv_loop_t</span></code> — Event loop</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/version.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="loop.html" title="uv_loop_t — Event loop"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="errors.html" title="Error handling"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">libuv 1.40.1-dev documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="api.html" >API documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014-present, libuv contributors.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
+    </div>
+  </body>
+</html>

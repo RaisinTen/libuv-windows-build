@@ -1,0 +1,175 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Introduction &#8212; libuv documentation</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.40.1-dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Basics of libuv" href="basics.html" />
+    <link rel="prev" title="User guide" href="../guide.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="basics.html" title="Basics of libuv"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../guide.html" title="User guide"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">libuv 1.40.1-dev documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../guide.html" accesskey="U">User guide</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p>This ‘book’ is a small set of tutorials about using <a class="reference external" href="https://github.com/libuv/libuv">libuv</a> as
+a high performance evented I/O library which offers the same API on Windows and Unix.</p>
+<p>It is meant to cover the main areas of libuv, but is not a comprehensive
+reference discussing every function and data structure. The <a class="reference external" href="http://docs.libuv.org/en/v1.x/">official libuv
+documentation</a> may be consulted for full details.</p>
+<p>This book is still a work in progress, so sections may be incomplete, but
+I hope you will enjoy it as it grows.</p>
+<div class="section" id="who-this-book-is-for">
+<h2>Who this book is for<a class="headerlink" href="#who-this-book-is-for" title="Permalink to this headline">¶</a></h2>
+<p>If you are reading this book, you are either:</p>
+<ol class="arabic simple">
+<li>a systems programmer, creating low-level programs such as daemons or network
+services and clients. You have found that the event loop approach is well
+suited for your application and decided to use libuv.</li>
+<li>a node.js module writer, who wants to wrap platform APIs
+written in C or C++ with a set of (a)synchronous APIs that are exposed to
+JavaScript. You will use libuv purely in the context of node.js. For
+this you will require some other resources as the book does not cover parts
+specific to v8/node.js.</li>
+</ol>
+<p>This book assumes that you are comfortable with the C programming language.</p>
+</div>
+<div class="section" id="background">
+<h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference external" href="https://www.nodejs.org">node.js</a> project began in 2009 as a JavaScript environment decoupled
+from the browser. Using Google’s <a class="reference external" href="https://v8.dev">V8</a> and Marc Lehmann’s <a class="reference external" href="http://software.schmorp.de/pkg/libev.html">libev</a>, node.js
+combined a model of I/O – evented – with a language that was well suited to
+the style of programming; due to the way it had been shaped by browsers. As
+node.js grew in popularity, it was important to make it work on Windows, but
+libev ran only on Unix. The Windows equivalent of kernel event notification
+mechanisms like kqueue or (e)poll is IOCP. libuv was an abstraction around libev
+or IOCP depending on the platform, providing users an API based on libev.
+In the node-v0.9.0 version of libuv <a class="reference external" href="https://github.com/joyent/libuv/issues/485">libev was removed</a>.</p>
+<p>Since then libuv has continued to mature and become a high quality standalone
+library for system programming. Users outside of node.js include Mozilla’s
+<a class="reference external" href="https://www.rust-lang.org">Rust</a> programming language, and a <a class="reference external" href="https://github.com/libuv/libuv/wiki/Projects-that-use-libuv">variety</a> of language bindings.</p>
+<p>This book and the code is based on libuv version <a class="reference external" href="https://github.com/libuv/libuv/tags">v1.3.0</a>.</p>
+</div>
+<div class="section" id="code">
+<h2>Code<a class="headerlink" href="#code" title="Permalink to this headline">¶</a></h2>
+<p>All the code from this book is included as part of the source of the book on
+Github. <a class="reference external" href="https://github.com/nikhilm/uvbook">Clone</a>/<a class="reference external" href="https://github.com/nikhilm/uvbook/downloads">Download</a> the book, then build libuv:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">libuv</span>
+<span class="o">./</span><span class="n">autogen</span><span class="o">.</span><span class="n">sh</span>
+<span class="o">./</span><span class="n">configure</span>
+<span class="n">make</span>
+</pre></div>
+</div>
+<p>There is no need to <code class="docutils literal"><span class="pre">make</span> <span class="pre">install</span></code>. To build the examples run <code class="docutils literal"><span class="pre">make</span></code> in the
+<code class="docutils literal"><span class="pre">code/</span></code> directory.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Introduction</a><ul>
+<li><a class="reference internal" href="#who-this-book-is-for">Who this book is for</a></li>
+<li><a class="reference internal" href="#background">Background</a></li>
+<li><a class="reference internal" href="#code">Code</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../guide.html"
+                        title="previous chapter">User guide</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="basics.html"
+                        title="next chapter">Basics of libuv</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/guide/introduction.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="basics.html" title="Basics of libuv"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../guide.html" title="User guide"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">libuv 1.40.1-dev documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../guide.html" >User guide</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014-present, libuv contributors.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
+    </div>
+  </body>
+</html>
