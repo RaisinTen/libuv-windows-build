@@ -16,7 +16,10 @@ jobs:
           cd build
           cmake .. -DBUILD_TESTING=ON
           cmake --build .
-          Debug\uv_run_tests_a.exe
+      - name: Test
+        shell: cmd
+        run: |
+          build\Debug\uv_run_tests_a.exe
 
   build-android:
     runs-on: ubuntu-latest
