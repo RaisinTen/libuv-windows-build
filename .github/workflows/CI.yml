@@ -3,6 +3,22 @@ name: CI
 on: [push, pull_request]
 
 jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Installing MSVC
+        uses: ilammy/msvc-dev-cmd@v1
+      - name: Build
+        run: |
+          mkdir build
+          cd build
+          cmake .. -DBUILD_TESTING=ON
+          cmake --build .
+      - name: Test
+        run: |
+          Debug\uv_run_tests.exe
+
   build-android:
     runs-on: ubuntu-latest
     container: reactnativecommunity/react-native-android:2020-5-20
