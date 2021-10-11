@@ -13,9 +13,10 @@ jobs:
         shell: cmd
         run: |
           mkdir -p build
-          (cd build && cmake .. -DBUILD_TESTING=ON)
-          cmake --build build
-          (cd build && ctest -C Debug --output-on-failure)
+          cd build
+          cmake .. -DBUILD_TESTING=ON)
+          cmake --build .
+          ctest -C Debug --output-on-failure
       - name: Test
         shell: cmd
         run: |
