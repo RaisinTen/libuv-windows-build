@@ -4,7 +4,20 @@ on: [push, pull_request]
 
 jobs:
   build-windows:
-    runs-on: windows-latest
+    runs-on: windows-${{ matrix.config.OS }}
+    name: build-${{ matrix.config.toolchain}}-${{ matrix.config.arch}}
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          # test x64 on all supported compiler versions
+          # test Win32 (x86) on the oldest and latest recommended versions
+          - {toolchain: "Visual Studio 12 2013", arch: x64, server: 2016}
+          - {toolchain: "Visual Studio 12 2013", arch: Win32, server: 2016}
+          - {toolchain: "Visual Studio 15 2017", arch: x64, OS: server: 2016}
+          - {toolchain: "Visual Studio 16 2019", arch: x64, OS: server: 2016}
+          - {toolchain: "Visual Studio 16 2019", arch: Win32, server: 2016}
+          - {toolchain: "Visual Studio 17 2022", arch: x64, OS: server: 2022} # in beta
     steps:
       - uses: actions/checkout@v2
       - name: Envinfo
@@ -14,13 +27,13 @@ jobs:
         run: |
           mkdir -p build
           cd build
-          cmake .. -DBUILD_TESTING=ON)
+          cmake .. -DBUILD_TESTING=ON -G ${{ matrix.config.toolchain }} -A ${{ matrix.config.arch }}
           cmake --build .
       - name: Test
         shell: cmd
         run: |
           cd build
-          ctest -C Debug --output-on-failure
+          ctest -C Debug
 
   build-android:
     runs-on: ubuntu-latest
