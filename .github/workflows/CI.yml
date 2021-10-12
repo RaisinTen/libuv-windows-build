@@ -12,12 +12,12 @@ jobs:
         config:
           # test x64 on all supported compiler versions
           # test Win32 (x86) on the oldest and latest recommended versions
-          - {toolchain: "Visual Studio 12 2013", arch: Win64, server: 2016}
-          - {toolchain: "Visual Studio 12 2013", arch: Win32, server: 2016}
-          - {toolchain: "Visual Studio 15 2017", arch: Win64, server: 2016}
-          - {toolchain: "Visual Studio 16 2019", arch: Win64, server: 2016}
-          - {toolchain: "Visual Studio 16 2019", arch: Win32, server: 2016}
-          - {toolchain: "Visual Studio 17 2022", arch: Win64, server: 2022} # in beta
+          - {toolchain: Visual Studio 12 2013, arch: Win64, server: 2016}
+          - {toolchain: Visual Studio 12 2013, arch: Win32, server: 2016}
+          - {toolchain: Visual Studio 15 2017, arch: Win64, server: 2016}
+          - {toolchain: Visual Studio 16 2019, arch: Win64, server: 2016}
+          - {toolchain: Visual Studio 16 2019, arch: Win32, server: 2016}
+          - {toolchain: Visual Studio 17 2022, arch: Win64, server: 2022} # in beta
     steps:
       - uses: actions/checkout@v2
       - name: Envinfo
@@ -27,7 +27,7 @@ jobs:
         run: |
           mkdir -p build
           cd build
-          cmake .. -DBUILD_TESTING=ON -G ${{ matrix.config.toolchain }} -A ${{ matrix.config.arch }}
+          cmake .. -DBUILD_TESTING=ON -G "${{ matrix.config.toolchain }}" -A ${{ matrix.config.arch }}
           cmake --build .
       - name: Test
         shell: cmd
