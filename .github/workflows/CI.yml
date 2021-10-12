@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 jobs:
   build-windows:
-    runs-on: windows-${{ matrix.config.OS }}
+    runs-on: windows-${{ matrix.config.server }}
     name: build-${{ matrix.config.toolchain}}-${{ matrix.config.arch}}
     strategy:
       fail-fast: false
@@ -14,10 +14,10 @@ jobs:
           # test Win32 (x86) on the oldest and latest recommended versions
           - {toolchain: "Visual Studio 12 2013", arch: x64, server: 2016}
           - {toolchain: "Visual Studio 12 2013", arch: Win32, server: 2016}
-          - {toolchain: "Visual Studio 15 2017", arch: x64, OS: server: 2016}
-          - {toolchain: "Visual Studio 16 2019", arch: x64, OS: server: 2016}
+          - {toolchain: "Visual Studio 15 2017", arch: x64, server: 2016}
+          - {toolchain: "Visual Studio 16 2019", arch: x64, server: 2016}
           - {toolchain: "Visual Studio 16 2019", arch: Win32, server: 2016}
-          - {toolchain: "Visual Studio 17 2022", arch: x64, OS: server: 2022} # in beta
+          - {toolchain: "Visual Studio 17 2022", arch: x64, server: 2022} # in beta
     steps:
       - uses: actions/checkout@v2
       - name: Envinfo
