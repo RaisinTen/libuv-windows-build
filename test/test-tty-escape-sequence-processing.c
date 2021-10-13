@@ -1072,6 +1072,11 @@ TEST_IMPL(tty_set_style) {
 
   loop = uv_default_loop();
 
+#if _MSC_VER >= 1920 && _MSC_VER <= 1929
+  RETURN_SKIP("Broken on Microsoft Visual Studio 2019, to be investigated. "
+              "See: https://github.com/libuv/libuv/issues/3304");
+#endif
+
   initialize_tty(&tty_out);
 
   capture_screen(&tty_out, &expect);
@@ -1349,6 +1354,11 @@ TEST_IMPL(tty_escape_sequence_processing) {
   int dir;
 
   loop = uv_default_loop();
+
+#if _MSC_VER >= 1920 && _MSC_VER <= 1929
+  RETURN_SKIP("Broken on Microsoft Visual Studio 2019, to be investigated. "
+              "See: https://github.com/libuv/libuv/issues/3304");
+#endif
 
   initialize_tty(&tty_out);
 
