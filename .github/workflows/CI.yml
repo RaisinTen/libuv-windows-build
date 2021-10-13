@@ -41,7 +41,7 @@ jobs:
         shell: cmd
         run: |
           cd build
-          ctest -C Debug
+          ctest -C Debug --output-on-failure
 
   build-android:
     runs-on: ubuntu-latest
